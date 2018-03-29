@@ -8,11 +8,11 @@ public:
 	~FixedList();
 	const T& get(unsigned int index) const;
 	//T& operator[](unsigned int index);
-	//int getFirstIndex(const T& t) const;
+	int getFirstIndex(const T& t) const;
 	size_t size() const;
 	size_t capacity() const;
 	bool add(const T& t);
-	T remove(const T& t);
+	//T remove(const T& t);
 private:
 	T l[N];
 	size_t s;
@@ -38,7 +38,23 @@ template<class T, size_t N>
 inline const T & FixedList<T, N>::get(unsigned int index) const
 {
 	// TODO: insert return statement here
-	return l[index];
+	if (index >= s) {
+		throw "exception"; 
+	}
+	else {
+		return l[index];
+	}
+}
+
+template<class T, size_t N>
+inline int FixedList<T, N>::getFirstIndex(const T & t) const
+{
+	for (int i = 0; i < s; ++i) {
+		if (l[i] == t) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 /* return how many elements are in the list */
@@ -69,9 +85,3 @@ inline bool FixedList<T, N>::add(const T & t)
 	return true;
 }
 
-template<class T, size_t N>
-inline T FixedList<T, N>::remove(const T & t)
-{
-	s--;
-	return l[s+1];
-}
