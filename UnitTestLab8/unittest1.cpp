@@ -31,13 +31,24 @@ namespace UnitTestLab8
 			FixedList<int, 10> int_list;
 			for (int i = 0; i < 10; ++i) {
 				Assert::AreEqual(int_list.add(i), true);
-				Assert::AreEqual(int_list.get(i), i);
 			};
 			Assert::AreEqual(int_list.add(-1), false);
 		}
 
-		TEST_METHOD(TestGet) {
-
+		// how to deal with exceptions in unit test?
+		TEST_METHOD(TestGet, _HAS_EXCEPTIONS) {
+			FixedList<int, 10> int_list;
+			for (int i = 0; i < 10; ++i) {
+				Assert::AreEqual(int_list.get(i), i);
+			};
+			try {
+				int_list.get(11);
+			}catch(NotFoundException e){
+				
+				const char* text = e.what();
+				std::cout << e.what();
+				Assert::AreEqual(text, "NotFoundException occurred");
+			}
 		}
 	};
 }

@@ -15,6 +15,12 @@ int main() {
 	catch (NotFoundException e) {
 		std::cout << e.what() << '\n';
 	}
+	try {
+		std::cout << l.get(10) << '\n';
+	}
+	catch (NotFoundException e) {
+		std::cout << e.what() << '\n';
+	}
 	std::cout << l.size() << '\n';
 	system("pause");
 	return 0;
