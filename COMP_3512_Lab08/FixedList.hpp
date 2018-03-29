@@ -5,7 +5,7 @@ template<class T, size_t N>
 class FixedList {
 public:
 	FixedList();
-	//~FixedList();
+	~FixedList();
 	//const T& get(unsigned int index) const;
 	//T& operator[](unsigned int index);
 	//int getFirstIndex(const T& t) const;
@@ -25,6 +25,11 @@ inline FixedList<T, N>::FixedList()
 {
 	l = std::list<T>(N);
 	s = N;
+}
+
+template<class T, size_t N>
+inline FixedList<T, N>::~FixedList()
+{
 }
 
 template<class T, size_t N>
