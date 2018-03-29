@@ -55,7 +55,6 @@ namespace UnitTestLab8
 			for (int i = 0; i < 10; ++i) {
 				Assert::AreEqual(int_list.add(i), true);
 			};
-			Assert::AreEqual(int_list.add(-1), false);
 		}
 
 		TEST_METHOD(TestAddition2) {
@@ -67,21 +66,70 @@ namespace UnitTestLab8
 		}
 
 		// how to deal with exceptions in unit test?
-		TEST_METHOD(TestGet) {
-			wchar_t message[200];
+		TEST_METHOD(TestGet_success) {
 			FixedList<int, 10> int_list;
+			for (int i = 0; i < 10; ++i) {
+				int_list.add(i);
+			};
 			for (int i = 0; i < 10; ++i) {
 				Assert::AreEqual(int_list.get(i), i);
 			};
-			try {
+		}
+
+		TEST_METHOD(TestGet_fail) {
+			FixedList<int, 10> int_list;
+			for (int i = 0; i < 10; ++i) {
+				int_list.add(i);
+			};
+			wchar_t message[200];
+			try
+			{
+				// Should raise an exception:  
 				int_list.get(11);
+
+				// if no exception thrown:
 				_swprintf(message, L"No exception for input %g", 11);
 				Assert::Fail(message, LINE_INFO());
 			}
-			catch (NotFoundException e) {
-				// catched expected exception
+			catch (NotFoundException ex)
+			{ // if catches NFE, passes
 			}
-			catch (...) {
+			catch (...)
+			{ // if catches any other exception, assert fail
+				_swprintf(message, L"wrong exception for input %g", 11);
+				Assert::Fail(message, LINE_INFO());
+			}
+		}
+
+		TEST_METHOD(testRemove_success) {
+			FixedList<int, 10> int_list;
+			for (int i = 0; i < 10; ++i) {
+				int_list.add(i);
+			};
+			Assert::AreEqual(int_list.remove(1), 1);
+		}
+
+		TEST_METHOD(testRemove_fail) {
+			FixedList<int, 10> int_list;
+			for (int i = 0; i < 10; ++i) {
+				int_list.add(i);
+			};
+			wchar_t message[200];
+			try
+			{
+				// Should raise an exception:  
+				int_list.remove(11);
+
+				// if no exception thrown:
+				_swprintf(message, L"No exception for input %g", 11);
+				Assert::Fail(message, LINE_INFO());
+			}
+			catch (NotFoundException ex)
+			{ // if catches NFE, passes
+			}
+			catch (...)
+			{ // if catches any other exception, assert fail
+				_swprintf(message, L"wrong exception for input %g", 11);
 				Assert::Fail(message, LINE_INFO());
 			}
 		}
