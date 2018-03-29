@@ -10,7 +10,7 @@ public:
 	//T& operator[](unsigned int index);
 	//int getFirstIndex(const T& t) const;
 	size_t size() const;
-	//size_t capacity() const;
+	size_t capacity() const;
 	//bool add(const T& t);
 	//T remove(const T& t);
 private:
@@ -24,7 +24,7 @@ template<class T, size_t N>
 inline FixedList<T, N>::FixedList()
 {
 	l = std::list<T>(N);
-	s = N;
+	s = 0;
 }
 
 template<class T, size_t N>
@@ -36,4 +36,10 @@ template<class T, size_t N>
 inline size_t FixedList<T, N>::size() const 
 {
 	return s;
+}
+
+template<class T, size_t N>
+inline size_t FixedList<T, N>::capacity() const
+{
+	return N;
 }
