@@ -47,6 +47,7 @@ inline const T & FixedList<T, N>::get(unsigned int index) const
 	// TODO: insert return statement here
 	if (index >= s) {
 		throw nfe; // throws not found exception
+		return -1;
 	}
 	else {
 		return l[index];
@@ -105,6 +106,7 @@ inline T FixedList<T, N>::remove(const T & t)
 	int index = getFirstIndex(t);
 	if (index == -1) {
 		throw nfe;
+		return -1;
 	}
 	else {
 		T deleted = l[index];
