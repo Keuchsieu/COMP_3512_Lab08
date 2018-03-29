@@ -9,7 +9,12 @@ int main() {
 	std::cout <<"get first element: " << l.get(0) << std::endl;
 	std::cout << "get first element: " << l[0] << std::endl;
 	std::cout << "get first index of 1: " << l.getFirstIndex(1) << '\n';
-	std::cout << l.remove(1) << '\n';
+	try {
+		std::cout << l.remove(9) << '\n';
+	}
+	catch (NotFoundException e) {
+		std::cout << e.what() << '\n';
+	}
 	std::cout << l.size() << '\n';
 	system("pause");
 	return 0;

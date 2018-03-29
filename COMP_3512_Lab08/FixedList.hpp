@@ -1,5 +1,12 @@
 #pragma once
 #include<iostream>
+#include<exception>
+class NotFoundException : public std::exception {
+public:
+	virtual const char* what() const throw() {
+		return "NotFoundException occurred";
+	}
+} nfe;
 
 template<class T, size_t N>
 class FixedList {
@@ -39,7 +46,7 @@ inline const T & FixedList<T, N>::get(unsigned int index) const
 {
 	// TODO: insert return statement here
 	if (index >= s) {
-		throw "exception"; 
+		throw nfe; // throws not found exception
 	}
 	else {
 		return l[index];
@@ -96,11 +103,16 @@ template<class T, size_t N>
 inline T FixedList<T, N>::remove(const T & t)
 {
 	int index = getFirstIndex(t);
-	T deleted = l[index];
-	for (int i = index; i < s-1; ++i) {
-		l[i] = l[i + 1];
+	if (index == -1) {
+		throw nfe;
 	}
-	s--;
-	return deleted;
+	else {
+		T deleted = l[index];
+		for (int i = index; i < s - 1; ++i) {
+			l[i] = l[i + 1];
+		}
+		s--;
+		return deleted;
+	}
 }
 
