@@ -7,7 +7,10 @@ int main() {
 	std::cout << std::boolalpha << "adding to list: " << l.add(1) << std::endl;
 	std::cout << l.size() << std::endl;
 	std::cout <<"get first element: " << l.get(0) << std::endl;
+	std::cout << "get first element: " << l[0] << std::endl;
 	std::cout << "get first index of 1: " << l.getFirstIndex(1) << '\n';
+	std::cout << l.remove(1) << '\n';
+	std::cout << l.size() << '\n';
 	system("pause");
 	return 0;
 }
